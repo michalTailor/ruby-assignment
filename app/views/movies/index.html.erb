@@ -1,14 +1,19 @@
 <h1>Movies</h1>
 
+Our blog has <%= Movie.public_count %> movies and counting!
+
 <ul>
   <% @movies.each do |movie| %>
-    <li>
-    <%= link_to movie.title, movie %>
-    </li>
+    <% unless movie.archived? %>
+      <li>
+        <%= link_to movie.title, movie %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
 <%= link_to "New Movie", new_movie_path %>
+
 
 
 

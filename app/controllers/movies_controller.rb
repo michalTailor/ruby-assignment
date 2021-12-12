@@ -1,8 +1,10 @@
 require 'yaml'
 class MoviesController < ApplicationController
 
-  before_action :cors_preflight_check
-  after_action :cors_set_access_control_headers
+  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
+
+#   before_action :cors_preflight_check
+#   after_action :cors_set_access_control_headers
 
 
   def cors_set_access_control_headers
@@ -25,11 +27,12 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #     @movies = Movie.all
+         @movies = Movie.all
+
     #     @movies = YAML.load_file('./db/data.yml')
     #     render json: @movies
 
-        render json: @movies = YAML.load_file(Rails.root.join("db",'movies.yml'))
+        #render json: @movies = YAML.load_file(Rails.root.join("db",'movies.yml'))
   end
 
   def show
@@ -73,11 +76,9 @@ class MoviesController < ApplicationController
 
   private
     def movie_params
-      params.require(:movie).permit(:title, :body)
+      params.require(:movie).permit(:title, :body, :status)
     end
+
 
 end
 
-
-
-#model_name = YAML.load_file('./config/file_name.yml')
