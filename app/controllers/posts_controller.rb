@@ -1,5 +1,4 @@
-require 'yaml'
-class MoviesController < ApplicationController
+class PostsController < ApplicationController
 
   http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
@@ -27,56 +26,55 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #     @movies = Movie.all
-
-    #     @movies = YAML.load_file('./db/data.yml')
-    #     render json: @movies
-
-    render json: @movies = YAML.load_file(Rails.root.join("db",'movies.yml'))
+     @posts = Post.all
+     render json: @posts
   end
 
   def show
-     @movie = Movie.find(params[:id])
+     @post = Post.find(params[:id])
+     render json: @post
   end
 
    def new
-      @movie = Movie.new
+      @post = Post.new
     end
 
   def create
-     @movie = Movie.new(movie_params)
+     @post = Post.new(movie_params)
 
-     if @movie.save
-       redirect_to @movie
+     if @post.save
+       redirect_to @post
      else
        render :new
      end
+     render json: @post
   end
 
   def edit
-    @movie = Movie.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def update
-    @movie = Movie.find(params[:id])
+    @post = Post.find(params[:id])
 
-    if @movie.update(movie_params)
-      redirect_to @movie
+    if @post.update(post_params)
+      redirect_to @post
     else
       render :edit
     end
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
-    @movie.destroy
+    @post = Post.find(params[:id])
+    @post.destroy
 
     redirect_to root_path
   end
 
   private
-    def movie_params
-      params.require(:movie).permit(:title, :body, :status)
+    def post_params
+      params.require(:post)
+      #params.require(:post).permit(:title, :body, :status)
     end
 
 
