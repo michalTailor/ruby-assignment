@@ -7,6 +7,7 @@ ruby '2.6.8'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '~> 1.4'
+# instead use postgreSQL:
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
@@ -22,12 +23,21 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# Use rspec-rails for testing:
+ gem "rspec-rails", "4.0.1"
+# Use factory_bot_rails for testing:
+ gem "factory_bot_rails", "6.1.0"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+
+# group :test do
+#   gem 'rspec-rails', '4.0.1'
+# #   gem 'webrat', '0.7.1'
+# end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
